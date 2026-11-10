@@ -18,39 +18,47 @@ public class Main {
         }
         float average = (float) sum / inputArray1.length;
         float[] outputArray1 = {sum, max, min, average};
-        System.out.print("inputArray1: ");
+        System.out.print("inputArray1: [");
         for (int i = 0; i < inputArray1.length; i++) {
             ;
             System.out.print(inputArray1[i] + " ");
         }
+        System.out.print("]");
         System.out.println();
-        System.out.print("outputArray1: ");
+        System.out.print("outputArray1: [");
         for (int i = 0; i < outputArray1.length; i++) {
             System.out.print(outputArray1[i] + " ");
         }
+        System.out.print("]");
         System.out.println();
         System.out.println();
         System.out.println("Запрос от налогового отдела");
         int[] inputArray2 = {10000, 20000, 30000, 40000, 50000};
-        double factor = 0.87;
+        double factor = 0.13;//определяю 13 процентов
+        int index = 0;
         double[] outputArray2 = new double[inputArray2.length];
-        for (int i = 0; i < inputArray2.length; i++) {
-            outputArray2[i] = inputArray2[i] * factor;
+        for (int payment2 : inputArray2){//вычисляю через for each
+            outputArray2[index] = (payment2 * factor);
+            index++;
         }
-        System.out.println("outputArray2: ");
+        System.out.print("outputArray2: [");
         for (int i = 0; i < outputArray2.length; i++) {
             System.out.printf("%.2f", outputArray2[i]);
             if (i < outputArray2.length - 1) {
                 System.out.print(", ");
             }
         }
+        System.out.print("]");
+
         System.out.println();
         System.out.println();
         System.out.println("Запрос от HR");
         int[] inputArray3 = {4500, 3345, 1234, 6789, 4567};
         boolean[] outputArray3 = new boolean[inputArray3.length];
-        for (int i=0; i<inputArray3.length; i++){
-            outputArray3[i]=inputArray3[i]>5000;
+        index=0;
+        for (int value : inputArray3){
+            outputArray3[index]=value>5000;
+            index++;
         }
         System.out.print("inputArray3:[");
         for (int i = 0; i<outputArray3.length; i++){
@@ -60,21 +68,28 @@ public class Main {
         System.out.print("]");
         System.out.println();
         System.out.print("outputArray3:[");
-        for (int i = 0; i < outputArray3.length; i++) {
-            System.out.print(outputArray3[i]);
-            if (i<outputArray3.length-1) System.out.print(", ");
+        boolean first = true;
+        for (boolean val : outputArray3 ){
+            if (!first){
+                System.out.print(", ");
+            }
+            System.out.print(val);
+            first = false;
         }
-        System.out.print("]");
-        System.out.println();
+        System.out.println("]");
+
         System.out.println();
         System.out.println("Запрос от кредитного отдела");
         int[] inputArray4 = {3456, -1234, 3456, 34, 2345};
-        boolean outputArray4=true;
-        for (int i = 0; i < inputArray4.length; i++) {
-            if (inputArray4[i]<0){
-                outputArray4 = false;
+        boolean[] outputArray4 = new boolean[1];
+        outputArray4[0]=true;
+        for (int balance : inputArray4){
+            if (balance<0){
+                outputArray4[0]=false;
+                break;
             }
         }
+
         System.out.print("inputArray4:[");
         for (int i =0; i<inputArray4.length; i++){
             System.out.print(inputArray4[i]);
@@ -83,21 +98,21 @@ public class Main {
             }
         }
         System.out.println("] ");
-        System.out.println("outputArray4: " + outputArray4);
+        System.out.println("outputArray4: [" + outputArray4[0] + "]");
 
         System.out.println();
         System.out.println("Запрос от CEO");
         int[] inputArray5={2345, -4567, -5678, 2345, 678};
         int profitableMonthsCount = 0;
-        for (int i = 0; i < inputArray5.length; i++) {
-            if (inputArray5[i]>0) {
-                profitableMonthsCount++;
+        for (int profit : inputArray5){
+            if (profit>0){
+            profitableMonthsCount++;
             }
         }
         int[] outputArray5 = new int[1];
         outputArray5[0]=profitableMonthsCount;
 
-        System.out.print("inoutArray5:[");
+        System.out.print("inputArray5:[");
         for (int i = 0; i < inputArray5.length; i++) {
             System.out.print(inputArray5[i]);
             if (i< inputArray5.length-1) {
@@ -106,8 +121,6 @@ public class Main {
         }
         System.out.println("] ");
 
-        System.out.print("outputArray5: [");
-        System.out.print(outputArray5[0]);
-        System.out.println("] ");
+        System.out.print("outputArray5: [" + outputArray5[0] + "]");
     }
 }
